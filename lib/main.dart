@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:product_api/src/login/login_cubit.dart';
-import 'package:product_api/src/login/login_widget.dart';
+import 'package:flutter_reqres_test/src/cubit/home_cubit.dart';
+
+import 'src/cubit/api_cubit.dart';
+import 'src/widget/page/home_page.dart';
 
 void main() {
   runApp(MaterialApp(
-      title: "Reqres API Sample",
-      home:
-          BlocProvider(create: (_) => LoginCubit(), child: const LoginPage())));
+      title: "REQRES API Sample",
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => APICubit()),
+          BlocProvider(create: (_) => HomeCubit())
+        ],
+        child: const HomePage(),
+      )));
 }
