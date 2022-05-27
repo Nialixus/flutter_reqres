@@ -3,25 +3,18 @@ part of "home_page.dart";
 class BottomPage extends StatelessWidget {
   const BottomPage.login({Key? key})
       : _id = 0,
-        _text = const [
-          "Login",
-          "Don't have an account yet? ",
-          "Register here",
-        ],
         super(key: key);
 
   const BottomPage.register({Key? key})
       : _id = 1,
-        _text = const ["Register", "Already have an account? ", "Login here"],
         super(key: key);
 
-  List<TextEditingController> get controllers =>
-      List.filled(2, TextEditingController());
-
-  final List<String> _text;
   final int _id;
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController email = TextEditingController();
+    TextEditingController password = TextEditingController();
     const Color primaryColor = Color(0xff31428B);
     const Color secondaryColor = Color(0xff583A75);
     const LinearGradient gradient = LinearGradient(
@@ -54,9 +47,15 @@ class BottomPage extends StatelessWidget {
                             color: secondaryColor,
                           ))),
                       child: TextFormField(
+                        controller: [email, password][x],
                         obscureText: x == 1,
                         decoration: InputDecoration(
-                            hintText: ["Email", "Password"][x],
+                            hintText: [
+                              "eve.holt@reqres.in",
+                              ["cityslicka", "pistol"][_id]
+                            ][x],
+                            labelText: ["Email", "Password"][x],
+                            labelStyle: const TextStyle(color: primaryColor),
                             border: InputBorder.none),
                       )),
                 Container(
@@ -65,18 +64,19 @@ class BottomPage extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      onTap: () => [
-                        context.read<APICubit>().login(
-                            email: controllers[0].text,
-                            password: controllers[1].text),
-                        context.read<APICubit>().register(
-                            email: controllers[0].text,
-                            password: controllers[1].text)
-                      ][_id],
+                      onTap: () {
+                        if (_id == 0) {
+                          context.read<APICubit>().login(
+                              email: email.text, password: password.text);
+                        } else {
+                          context.read<APICubit>().register(
+                              email: email.text, password: password.text);
+                        }
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15.0),
                         child: Text(
-                          _text[0].toUpperCase(),
+                          ["Login", "Register"][_id].toUpperCase(),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
@@ -90,12 +90,17 @@ class BottomPage extends StatelessWidget {
                     for (int x = 0; x < 2; x++)
                       TextSpan(
                           text: [
-                            _text[1],
-                            _text[2],
+                            [
+                              "Don't have an account yet? ",
+                              "Already have an account? "
+                            ][_id],
+                            ["Register here", "Login here"][_id],
                           ][x],
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               if (x == 1) {
+                                email.clear();
+                                password.clear();
                                 context.read<HomeCubit>().onTap();
                               }
                             },

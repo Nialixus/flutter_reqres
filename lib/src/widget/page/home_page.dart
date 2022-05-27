@@ -2,11 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'dashboard_page.dart';
 import '../../cubit/api_cubit.dart';
 import '../../cubit/home_cubit.dart';
 
-part 'home_listener.dart';
-part 'bottom_page.dart';
+part '../api_listener.dart';
+part 'home_page_bottom.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -47,12 +48,12 @@ class HomePage extends StatelessWidget {
                             flex: 1,
                             child: Text(
                               "Flutter test with REQRES API",
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 20.0,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
-                              textAlign: TextAlign.center,
                             )),
                         Expanded(
                           flex: 3,
