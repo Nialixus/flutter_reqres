@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reqres_test/src/cubit/home_cubit.dart';
-import 'package:flutter_reqres_test/src/widget/page/dashboard_page.dart';
+import 'package:flutter_reqres_test/src/widget/page/home_page.dart';
 
 import 'src/cubit/api_cubit.dart';
-import 'src/widget/page/home_page.dart';
+import 'src/widget/page/prehome_page.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -17,5 +17,5 @@ void main() {
         ],
         child: const HomePage(),
       )*/
-          Dashboard()));
+          HomePage()));
 }

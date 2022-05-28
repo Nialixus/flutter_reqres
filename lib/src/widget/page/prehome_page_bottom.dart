@@ -1,4 +1,4 @@
-part of "home_page.dart";
+part of 'prehome_page.dart';
 
 class BottomPage extends StatelessWidget {
   const BottomPage.login({Key? key})

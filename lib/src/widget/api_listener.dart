@@ -1,4 +1,4 @@
-part of 'page/home_page.dart';
+part of "page/prehome_page.dart";
 
 class APIListener extends StatelessWidget {
   const APIListener({Key? key, required this.child}) : super(key: key);
@@ -24,7 +24,7 @@ class APIListener extends StatelessWidget {
           Navigator.pop(listen);
           Navigator.push(
             listen,
-            MaterialPageRoute(builder: (_) => const Dashboard()),
+            MaterialPageRoute(builder: (_) => const HomePage()),
           );
         }
       },

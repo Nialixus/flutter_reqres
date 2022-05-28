@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -43,12 +40,14 @@ class UserPage extends StatelessWidget {
                           backgroundColor: Colors.transparent,
                           elevation: 0.0,
                           actions: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.more_vert,
-                                  color: Colors.white,
-                                )),
+                            PopupMenuButton(
+                                tooltip: "Menu",
+                                itemBuilder: (_) => [
+                                      for (int y = 0; y < 2; y++)
+                                        PopupMenuItem(
+                                            onTap: () {},
+                                            child: Text(["Edit", "Delete"][y]))
+                                    ])
                           ],
                         )),
                     Expanded(
@@ -59,7 +58,7 @@ class UserPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text("Janet Weaver",
+                              const Text("Janet Weaver",
                                   style: TextStyle(
                                       fontSize: 30.0,
                                       color: Colors.white,
@@ -91,7 +90,7 @@ class UserPage extends StatelessWidget {
                                             onTap: () {},
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
-                                            child: Padding(
+                                            child: const Padding(
                                               padding: EdgeInsets.all(16.0),
                                               child: Text(
                                                 "Support Reqres",
@@ -126,10 +125,9 @@ class UserPage extends StatelessWidget {
                                               onTap: () {},
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 16.0),
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 16.0),
                                                 child: Icon(
                                                   Icons.thumb_up_alt_rounded,
                                                   color: Colors.white,
