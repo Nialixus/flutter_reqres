@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_reqres_test/src/widget/page/user_page.dart';
 
 export 'dashboard_page.dart' hide contentTitle, header, resource, user;
 
@@ -37,7 +38,9 @@ class Dashboard extends StatelessWidget {
                         delegate: SliverChildListDelegate(
                       [
                         contentTitle(context, title: "User", add: true),
-                        user(width, secondaryColor: secondaryColor),
+                        user(context, width,
+                            primaryColor: primaryColor,
+                            secondaryColor: secondaryColor),
                         contentTitle(context, title: "Resource"),
                         resource(width)
                       ],
@@ -150,56 +153,79 @@ SliverAppBar get header {
   );
 }
 
-Widget user(double width, {required Color secondaryColor}) => SizedBox(
+Widget user(BuildContext context, double width,
+        {required Color primaryColor, required Color secondaryColor}) =>
+    SizedBox(
       width: width,
       height: 250,
       child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+        padding: EdgeInsets.only(left: width * 0.05),
         scrollDirection: Axis.horizontal,
         child: Row(children: [
           for (int x = 0; x < 10; x++)
-            Container(
-              margin: EdgeInsets.only(right: x == 9 ? 0.0 : width * 0.05),
-              width: 150,
-              height: 250,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.white,
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                          secondaryColor.withOpacity(0.25), BlendMode.color),
-                      image: const NetworkImage("https://i.pravatar.cc/150"))),
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10.0),
-                        bottomRight: Radius.circular(10.0))),
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0, vertical: 16.0),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: const [
-                      Text(
-                        "Name",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0),
+            Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: width * 0.05),
+                  width: 150,
+                  height: 250,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.white,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              secondaryColor.withOpacity(0.25),
+                              BlendMode.color),
+                          image:
+                              const NetworkImage("https://i.pravatar.cc/150"))),
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0))),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 16.0),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: const [
+                          Text(
+                            "Name",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0),
+                          ),
+                          Text(
+                            "name@mail.com",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 12.0),
+                          )
+                        ],
                       ),
-                      Text(
-                        "name@mail.com",
-                        style: TextStyle(color: Colors.white, fontSize: 12.0),
-                      )
-                    ],
+                    ),
                   ),
                 ),
-              ),
+                Positioned.fill(
+                    child: Padding(
+                  padding: EdgeInsets.only(right: width * 0.05),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(10.0),
+                      splashColor: primaryColor.withOpacity(0.25),
+                      highlightColor: Colors.black.withOpacity(0.25),
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => const UserPage())),
+                    ),
+                  ),
+                ))
+              ],
             )
         ]),
       ),
