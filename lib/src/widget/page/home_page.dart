@@ -59,6 +59,7 @@ Widget resource(BuildContext context, double width) => SizedBox(
       width: width,
       height: 125,
       child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: width * 0.05),
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -145,13 +146,16 @@ SliverAppBar get header {
               color: Colors.white,
             ),
           const Spacer(),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.power_settings_new_rounded,
-                color: Colors.white,
-                size: 20.0,
-              ))
+          Tooltip(
+            message: "Log out",
+            child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.power_settings_new_rounded,
+                  color: Colors.white,
+                  size: 20.0,
+                )),
+          )
         ]..insert(
             1,
             const SizedBox(
@@ -168,6 +172,7 @@ Widget user(BuildContext context, double width,
       child: SingleChildScrollView(
         padding: EdgeInsets.only(left: width * 0.05),
         scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
         child: Row(children: [
           for (int x = 0; x < 10; x++)
             Stack(
