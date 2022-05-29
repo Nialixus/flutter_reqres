@@ -12,7 +12,6 @@ class EditPage extends StatelessWidget {
         end: Alignment.bottomCenter,
         colors: [primaryColor, secondaryColor]);
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Stack(
       alignment: Alignment.topCenter,
       children: [
@@ -35,8 +34,8 @@ class EditPage extends StatelessWidget {
                   children: [
                     for (int x = 0; x < 2; x++)
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        margin: EdgeInsets.only(top: 16.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        margin: const EdgeInsets.only(top: 16.0),
                         decoration: BoxDecoration(
                           color: primaryColor.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(10.0),
@@ -45,7 +44,7 @@ class EditPage extends StatelessWidget {
                           maxLines: 1,
                           decoration: InputDecoration(
                               hintText: ["morpheus", "zion resident"][x],
-                              labelStyle: TextStyle(color: primaryColor),
+                              labelStyle: const TextStyle(color: primaryColor),
                               labelText: ["Name", "Job"][x],
                               border: InputBorder.none),
                         ),
@@ -77,15 +76,15 @@ class EditPage extends StatelessWidget {
               )),
         ),
         Transform.translate(
-            offset: Offset(0, -35),
+            offset: const Offset(0, -35),
             child: Container(
               width: 70.0,
               height: 70.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),
-              padding: EdgeInsets.all(12.5),
+              padding: const EdgeInsets.all(12.5),
               child: Image.network(
                 "https://user-images.githubusercontent.com/45191605/170668043-3b3ba0f0-7348-45a1-ab9f-b12744a35aa2.png",
                 color: primaryColor,

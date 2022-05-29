@@ -4,15 +4,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 
-part '../state/api_state.dart';
+part '../state/log_api_state.dart';
 
-class APICubit extends Cubit<APIState> {
-  APICubit() : super(APIInitiatedState());
+class LogAPICubit extends Cubit<LogAPIState> {
+  LogAPICubit() : super(LogAPIInitiated());
 
   String base = "https://reqres.in/api";
 
   void register({required String email, required String password}) {
-    emit(APILoginLoadingState());
+    emit(LogAPILoading());
 
     post(
       Uri.parse('$base/register'),
@@ -23,9 +23,9 @@ class APICubit extends Cubit<APIState> {
     ).then((response) {
       var json = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        emit(APILoginSucceedState(id: json["id"], token: json["token"]));
+        emit(LogAPISucceed(id: json["id"], token: json["token"]));
       } else {
-        emit(APILoginFailedState(
+        emit(LogAPIFailed(
           messageTitle: "Register Failed",
           messageContent: json["error"],
         ));
@@ -34,7 +34,7 @@ class APICubit extends Cubit<APIState> {
   }
 
   void login({required String email, required String password}) {
-    emit(APILoginLoadingState());
+    emit(LogAPILoading());
 
     post(
       Uri.parse('$base/login'),
@@ -45,9 +45,9 @@ class APICubit extends Cubit<APIState> {
     ).then((response) {
       var json = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        emit(APILoginSucceedState(token: json["token"]));
+        emit(LogAPISucceed(token: json["token"]));
       } else {
-        emit(APILoginFailedState(
+        emit(LogAPIFailed(
           messageTitle: "Login Failed",
           messageContent: json["error"],
         ));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_reqres_test/src/widget/page/edit_page.dart';
+
+import 'edit_page.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -54,9 +55,10 @@ class UserPage extends StatelessWidget {
                                                         seconds: 1))
                                                     .then((value) => showDialog(
                                                         context: _,
-                                                        builder: (__) => Align(
-                                                            child:
-                                                                EditPage())));
+                                                        builder: (__) =>
+                                                            const Align(
+                                                                child:
+                                                                    EditPage())));
                                               },
                                               child:
                                                   Text(["Edit", "Delete"][y]))

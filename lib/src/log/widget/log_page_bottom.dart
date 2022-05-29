@@ -1,4 +1,4 @@
-part of 'prehome_page.dart';
+part of 'log_page.dart';
 
 class BottomPage extends StatelessWidget {
   const BottomPage.login({Key? key})
@@ -66,10 +66,10 @@ class BottomPage extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         if (_id == 0) {
-                          context.read<APICubit>().login(
+                          context.read<LogAPICubit>().login(
                               email: email.text, password: password.text);
                         } else {
-                          context.read<APICubit>().register(
+                          context.read<LogAPICubit>().register(
                               email: email.text, password: password.text);
                         }
                       },
@@ -101,7 +101,7 @@ class BottomPage extends StatelessWidget {
                               if (x == 1) {
                                 email.clear();
                                 password.clear();
-                                context.read<HomeCubit>().onTap();
+                                context.read<LogSwitchCubit>().onTap();
                               }
                             },
                           style: x == 1

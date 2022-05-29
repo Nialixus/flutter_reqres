@@ -1,13 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_reqres_test/src/log/cubit/log_switch_cubit.dart';
 
-import 'home_page.dart';
-import '../../cubit/api_cubit.dart';
-import '../../cubit/home_cubit.dart';
-
-part "../api_listener.dart";
-part 'prehome_page_bottom.dart';
+import '../../home/widget/home_page.dart';
+import '../../log/cubit/log_api_cubit.dart';
+part 'log_page_bottom.dart';
+part 'log_api_listener.dart';
 
 class PreHomePage extends StatelessWidget {
   const PreHomePage({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class PreHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return APIListener(
+    return LogAPIListener(
         child: Scaffold(
             backgroundColor: const Color(0xff31428B),
             body: DecoratedBox(
@@ -57,7 +56,7 @@ class PreHomePage extends StatelessWidget {
                             )),
                         Expanded(
                           flex: 3,
-                          child: BlocBuilder<HomeCubit, bool>(
+                          child: BlocBuilder<LogSwitchCubit, bool>(
                               builder: ((context, state) => state
                                   ? const BottomPage.login()
                                   : const BottomPage.register())),
