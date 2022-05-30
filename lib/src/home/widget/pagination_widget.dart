@@ -1,63 +1,90 @@
 part of 'home_page.dart';
 
-class Pagination<B extends StateStreamable<S>, S> extends StatelessWidget {
-  const Pagination({Key? key}) : super(key: key);
+class Pagination extends StatelessWidget {
+  const Pagination.user({Key? key})
+      : _id = 0,
+        super(key: key);
+  const Pagination.resource({Key? key})
+      : _id = 1,
+        super(key: key);
+
+  final int _id;
 
   @override
   Widget build(BuildContext context) {
-    if (B is UserListCubit && S is UserListState ||
-        B is ResourceListCubit && S is ResourceListState) {
-      return BlocBuilder<B, S>(builder: ((context, state) {
-        if (state is UserListSucceed || state is ResourceListSucceed) {
-          UserListModel? userModels =
-              state is UserListSucceed ? state.model : null;
-          ResourceListModel? resourceModels =
-              state is ResourceListSucceed ? state.model : null;
+    if (_id == 0) {
+      return BlocBuilder<UserListCubit, UserListState>(builder: (_, state) {
+        if (state is UserListSucceed) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int x = 0;
-                  x < (userModels?.data.length ?? resourceModels!.data.length);
-                  x++)
+              for (int x = 0; x < state.model.totalPages; x++)
                 Tooltip(
                   message: "Page ${x + 1}",
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
                       customBorder: const CircleBorder(),
-                      onTap: () => B is UserListCubit
-                          ? context.read<UserListCubit>().fetching(page: x + 1)
-                          : context
-                              .read<ResourceListCubit>()
-                              .fetching(page: x + 1),
+                      onTap: () =>
+                          context.read<UserListCubit>().fetching(page: x + 1),
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         decoration: BoxDecoration(
-                            color: x ==
-                                    (userModels?.page ?? resourceModels!.page) -
-                                        1
+                            color: x == state.model.page - 1
                                 ? Colors.white
                                 : Colors.grey,
                             borderRadius: BorderRadius.circular(10.0)),
                         margin: const EdgeInsets.symmetric(
                             horizontal: 4.0, vertical: 16.0),
                         height: 7.5,
-                        width:
-                            x == (userModels?.page ?? resourceModels!.page) - 1
-                                ? 20.0
-                                : 7.5,
+                        width: x == state.model.page - 1 ? 20.0 : 7.5,
                       ),
                     ),
                   ),
                 )
             ],
           );
-        } else {
-          return const SizedBox();
         }
-      }));
-    } else {
-      return ErrorWidget("Pagination State is missing");
+
+        return const SizedBox();
+      });
     }
+
+    return BlocBuilder<ResourceListCubit, ResourceListState>(
+        builder: (_, state) {
+      if (state is ResourceListSucceed) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (int x = 0; x < state.model.totalPages; x++)
+              Tooltip(
+                message: "Page ${x + 1}",
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () =>
+                        context.read<ResourceListCubit>().fetching(page: x + 1),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      decoration: BoxDecoration(
+                          color: x == state.model.page - 1
+                              ? Colors.white
+                              : Colors.grey,
+                          borderRadius: BorderRadius.circular(10.0)),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 4.0, vertical: 16.0),
+                      height: 7.5,
+                      width: x == state.model.page - 1 ? 20.0 : 7.5,
+                    ),
+                  ),
+                ),
+              )
+          ],
+        );
+      }
+
+      return const SizedBox();
+    });
   }
 }

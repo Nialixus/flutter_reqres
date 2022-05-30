@@ -13,9 +13,10 @@ class ResourceListWidget extends StatelessWidget {
           builder: (context, state) {
         if (state is ResourceListSucceed) {
           return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.only(left: width * 0.05),
+              key: key,
               scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.only(left: width * 0.05),
+              physics: const BouncingScrollPhysics(),
               child: Row(
                 children: [
                   for (int x = 0; x < state.model.data.length; x++)
@@ -84,8 +85,54 @@ class ResourceListWidget extends StatelessWidget {
                     )
                 ],
               ));
+        } else if (state is ResourceListFailed) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.error_outline,
+                color: Colors.white,
+              ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: width * 0.75),
+                child: Text(
+                  state.message,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 4,
+                  style: const TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          );
         } else {
-          return Container();
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.only(left: width * 0.05),
+            child: Row(
+              children: [
+                for (int x = 0; x < 6; x++)
+                  Container(
+                    clipBehavior: Clip.hardEdge,
+                    margin: EdgeInsets.only(
+                      right: width * 0.05,
+                      top: 25.0,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    width: 100,
+                    height: 100,
+                    child: LinearProgressIndicator(
+                        color: Colors.white.withOpacity(0.1),
+                        backgroundColor: Colors.white.withOpacity(0.1)),
+                  ),
+              ],
+            ),
+          );
         }
       }),
     );

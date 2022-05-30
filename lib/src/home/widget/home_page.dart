@@ -49,11 +49,10 @@ class HomePage extends StatelessWidget {
                       [
                         contentTitle(context, title: "User", add: true),
                         const UserListWidget(),
-                        const Pagination<UserListCubit, UserListState>(),
+                        const Pagination.user(),
                         contentTitle(context, title: "Resource"),
                         const ResourceListWidget(),
-                        const Pagination<ResourceListCubit,
-                            ResourceListState>(),
+                        const Pagination.resource(),
                       ],
                     ))
                   ],
