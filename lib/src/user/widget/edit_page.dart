@@ -1,7 +1,11 @@
 part of 'user_page.dart';
 
+/// Widget to call [UserCubit.updating].
 class EditPage extends StatelessWidget {
+  /// Updating API by calling [UserCubit.updating].
   const EditPage({Key? key, required this.model}) : super(key: key);
+
+  /// User Model from API.
   final SingleUserModel model;
 
   @override
@@ -15,9 +19,13 @@ class EditPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     TextEditingController name = TextEditingController();
     TextEditingController job = TextEditingController();
+
     return Stack(
       alignment: Alignment.topCenter,
       children: [
+        //
+        // ResRes Update
+        //
         Material(
           color: Colors.transparent,
           child: Container(
@@ -66,6 +74,9 @@ class EditPage extends StatelessWidget {
                               .updating(model.data.id,
                                   name: name.text, job: job.text)
                               .then((value) {
+                            //
+                            // Show snackbar after updating API.
+                            //
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 backgroundColor: Colors.white,
                                 content: Text(
@@ -92,6 +103,10 @@ class EditPage extends StatelessWidget {
                 ),
               )),
         ),
+
+        //
+        // ReqRes Logo
+        //
         Transform.translate(
             offset: const Offset(0, -35),
             child: Container(

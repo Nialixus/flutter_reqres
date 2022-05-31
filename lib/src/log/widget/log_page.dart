@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reqres_test/src/log/cubit/log_switch_cubit.dart';
 
+import '../../home/cubit/resourcelist_cubit.dart';
+import '../../home/cubit/userlist_cubit.dart';
 import '../../home/widget/home_page.dart';
 import '../../log/cubit/log_api_cubit.dart';
 part 'log_page_bottom.dart';
 part 'log_api_listener.dart';
 
-class PreHomePage extends StatelessWidget {
-  const PreHomePage({Key? key}) : super(key: key);
+class LogPage extends StatelessWidget {
+  const LogPage({Key? key}) : super(key: key);
 
   List<TextEditingController> get controllers =>
       List.generate(2, (x) => TextEditingController());

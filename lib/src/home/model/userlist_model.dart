@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_reqres_test/src/etc/model/support_model.dart';
 import 'package:flutter_reqres_test/src/user/model/user_model.dart';
 

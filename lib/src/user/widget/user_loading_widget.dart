@@ -1,6 +1,8 @@
 part of 'user_page.dart';
 
+/// Widget where [UserCubit.fetching] is ongoing.
 class UserLoadingWidget extends StatelessWidget {
+  /// Displayed widget while [UserCubit.fetching].
   const UserLoadingWidget({Key? key}) : super(key: key);
 
   @override
@@ -15,35 +17,42 @@ class UserLoadingWidget extends StatelessWidget {
       backgroundColor: Colors.white.withOpacity(0.1),
     );
 
-    return Stack(
-      children: [
-        const Positioned.fill(
-          child: DecoratedBox(decoration: BoxDecoration(gradient: gradient)),
-        ),
-        Padding(
+    return Stack(children: [
+      //
+      // Background
+      //
+      const Positioned.fill(
+          child: DecoratedBox(
+              decoration: BoxDecoration(
+        gradient: gradient,
+      ))),
+
+      //
+      // Shimmering Animation
+      //
+      Padding(
           padding: EdgeInsets.all(padding),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Spacer(),
-              Container(
-                clipBehavior: Clip.hardEdge,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-                height: kToolbarHeight,
-                child: indicator,
-              ),
-              Expanded(
-                  child: Container(
-                clipBehavior: Clip.hardEdge,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-                margin: EdgeInsets.symmetric(vertical: padding),
-                child: indicator,
-              )),
-              Row(
-                children: [
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Spacer(),
+                Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+                  height: kToolbarHeight,
+                  child: indicator,
+                ),
+                Expanded(
+                    child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+                  margin: EdgeInsets.symmetric(vertical: padding),
+                  child: indicator,
+                )),
+                Row(children: [
                   Expanded(
                       child: Container(
                     height: kToolbarHeight,
@@ -61,12 +70,8 @@ class UserLoadingWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0)),
                     child: indicator,
                   )
-                ],
-              )
-            ],
-          ),
-        ),
-      ],
-    );
+                ])
+              ]))
+    ]);
   }
 }

@@ -7,7 +7,6 @@ import 'package:flutter_reqres_test/src/home/cubit/resourcelist_cubit.dart';
 import 'package:flutter_reqres_test/src/home/cubit/userlist_cubit.dart';
 import '../../resource/cubit/resource_cubit.dart';
 import '../../user/cubit/user_cubit.dart';
-import '../../user/model/single_user_model.dart';
 import '../../user/widget/user_page.dart';
 import '../../resource/widget/resource_page.dart';
 
@@ -45,7 +44,7 @@ class HomePage extends StatelessWidget {
                 height: height,
                 child: CustomScrollView(
                   slivers: [
-                    header,
+                    header(context),
                     SliverList(
                         delegate: SliverChildListDelegate(
                       const [
@@ -66,12 +65,13 @@ class HomePage extends StatelessWidget {
   }
 }
 
-SliverAppBar get header {
+SliverAppBar header(BuildContext context) {
   String logo =
       "https://user-images.githubusercontent.com/45191605/170668043-3b3ba0f0-7348-45a1-ab9f-b12744a35aa2.png";
   String textLogo =
       "https://user-images.githubusercontent.com/45191605/170668104-381e0df8-75bc-4b7e-b39d-f6d011be97f6.png";
   return SliverAppBar(
+    automaticallyImplyLeading: false,
     backgroundColor: Colors.transparent,
     elevation: 0.0,
     toolbarHeight: 80.0,
@@ -88,7 +88,7 @@ SliverAppBar get header {
           Tooltip(
             message: "Log out",
             child: IconButton(
-                onPressed: () {},
+                onPressed: () => Navigator.pop(context),
                 icon: const Icon(
                   Icons.power_settings_new_rounded,
                   color: Colors.white,

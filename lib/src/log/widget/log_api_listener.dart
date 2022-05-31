@@ -24,7 +24,11 @@ class LogAPIListener extends StatelessWidget {
           Navigator.pop(listen);
           Navigator.push(
             listen,
-            MaterialPageRoute(builder: (_) => const HomePage()),
+            MaterialPageRoute(
+                builder: (_) => MultiBlocProvider(providers: [
+                      BlocProvider(create: (_) => UserListCubit()),
+                      BlocProvider(create: (_) => ResourceListCubit())
+                    ], child: const HomePage())),
           );
         }
       },
