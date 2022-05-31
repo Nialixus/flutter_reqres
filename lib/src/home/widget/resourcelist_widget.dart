@@ -36,7 +36,10 @@ class ResourceListWidget extends StatelessWidget {
                                   context: context,
                                   backgroundColor: Colors.transparent,
                                   barrierColor: Colors.black.withOpacity(0.85),
-                                  builder: (_) => const ResourcePage()),
+                                  builder: (_) => BlocProvider(
+                                      create: (_) => ResourceCubit(
+                                          id: state.model.data[x].id),
+                                      child: const ResourcePage())),
                               child: Container(
                                 width: 100,
                                 height: 100,

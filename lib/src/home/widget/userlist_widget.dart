@@ -81,7 +81,10 @@ class UserListWidget extends StatelessWidget {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => const UserPage())),
+                                    builder: (_) => BlocProvider(
+                                        create: (_) => UserCubit(
+                                            id: state.model.data[x].id),
+                                        child: const UserPage()))),
                           ),
                         ),
                       ))

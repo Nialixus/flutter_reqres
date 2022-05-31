@@ -5,15 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reqres_test/src/etc/extension/capitalize.dart';
 import 'package:flutter_reqres_test/src/home/cubit/resourcelist_cubit.dart';
 import 'package:flutter_reqres_test/src/home/cubit/userlist_cubit.dart';
-import 'package:flutter_reqres_test/src/home/model/resourcelist_model.dart';
-import 'package:flutter_reqres_test/src/home/model/user_model.dart';
-import 'package:flutter_reqres_test/src/home/model/userlist_model.dart';
+import '../../resource/cubit/resource_cubit.dart';
+import '../../user/cubit/user_cubit.dart';
+import '../../user/model/single_user_model.dart';
 import '../../user/widget/user_page.dart';
-import 'resource_page.dart';
+import '../../resource/widget/resource_page.dart';
 
 part 'userlist_widget.dart';
 part 'pagination_widget.dart';
 part 'resourcelist_widget.dart';
+part 'add_page.dart';
+part 'title_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -46,13 +48,13 @@ class HomePage extends StatelessWidget {
                     header,
                     SliverList(
                         delegate: SliverChildListDelegate(
-                      [
-                        contentTitle(context, title: "User", add: true),
-                        const UserListWidget(),
-                        const Pagination.user(),
-                        contentTitle(context, title: "Resource"),
-                        const ResourceListWidget(),
-                        const Pagination.resource(),
+                      const [
+                        TitleWidget(title: "User", add: true),
+                        UserListWidget(),
+                        Pagination.user(),
+                        TitleWidget(title: "Resource"),
+                        ResourceListWidget(),
+                        Pagination.resource(),
                       ],
                     ))
                   ],
@@ -63,26 +65,6 @@ class HomePage extends StatelessWidget {
         ));
   }
 }
-
-Widget pagination() => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (int x = 0; x < 2; x++)
-          GestureDetector(
-            onTap: () {},
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 750),
-              decoration: BoxDecoration(
-                  color: [Colors.white, Colors.grey][x],
-                  borderRadius: BorderRadius.circular(10.0)),
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 16.0),
-              height: 7.5,
-              width: [20.0, 7.5][x],
-            ),
-          )
-      ],
-    );
 
 SliverAppBar get header {
   String logo =
@@ -120,59 +102,3 @@ SliverAppBar get header {
             ))),
   );
 }
-
-Widget contentTitle(BuildContext context, {required String title, bool? add}) =>
-    Padding(
-      padding: EdgeInsets.only(
-        left: MediaQuery.of(context).size.width * 0.05,
-        bottom: MediaQuery.of(context).size.width * 0.05,
-        top: MediaQuery.of(context).size.width * 0.05,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-              child: Text(
-            title,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-                color: Colors.white),
-          )),
-          add == true
-              ? Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.025),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(10.0),
-                      onTap: () {
-                        print("tap");
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.025,
-                            vertical: 4.0),
-                        child: const Text.rich(
-                          TextSpan(children: [
-                            TextSpan(text: "Add "),
-                            WidgetSpan(
-                                alignment: PlaceholderAlignment.middle,
-                                child: Icon(
-                                  Icons.keyboard_arrow_right_rounded,
-                                  color: Colors.white,
-                                ))
-                          ]),
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : const SizedBox()
-        ],
-      ),
-    );

@@ -3,7 +3,7 @@ import 'package:flutter_reqres_test/src/etc/extension/capitalize.dart';
 
 import '../../etc/model/support_model.dart';
 
-part 'resource_model.dart';
+part '../../resource/model/resource_model.dart';
 
 class ResourceListModel {
   final int page;

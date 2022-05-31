@@ -1,8 +1,7 @@
-part of 'user_page.dart';
+part of 'home_page.dart';
 
-class EditPage extends StatelessWidget {
-  const EditPage({Key? key, required this.model}) : super(key: key);
-  final SingleUserModel model;
+class AddPage extends StatelessWidget {
+  const AddPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class EditPage extends StatelessWidget {
                           maxLines: 1,
                           controller: [name, job][x],
                           decoration: InputDecoration(
-                              hintText: ["morpheus", "zion resident"][x],
+                              hintText: ["morpheus", "leader"][x],
                               labelStyle: const TextStyle(color: primaryColor),
                               labelText: ["Name", "Job"][x],
                               border: InputBorder.none),
@@ -63,8 +62,7 @@ class EditPage extends StatelessWidget {
                         child: InkWell(
                           onTap: () => context
                               .read<UserCubit>()
-                              .updating(model.data.id,
-                                  name: name.text, job: job.text)
+                              .creating(name: name.text, job: job.text)
                               .then((value) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 backgroundColor: Colors.white,
@@ -78,7 +76,7 @@ class EditPage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 15.0),
                             child: Text(
-                              "Update".toUpperCase(),
+                              "Create".toUpperCase(),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   color: Colors.white,

@@ -1,4 +1,4 @@
-part of "resourcelist_model.dart";
+part of '../../home/model/resourcelist_model.dart';
 
 class ResourceModel {
   final int id;
