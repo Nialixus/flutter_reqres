@@ -118,14 +118,16 @@ class ResourcePage extends StatelessWidget {
                                               ),
                                               Text(
                                                 [
-                                                  state.model.data.name,
+                                                  state.model.data.name
+                                                      .toCaps(),
                                                   state.model.data.year
                                                       .toString(),
                                                   state.model.data.color
-                                                      .asString(),
+                                                      .asString()
+                                                      .toUpperCase(),
                                                   state.model.data.pantoneValue
-                                                ][x]
-                                                    .toCaps(),
+                                                      .toUpperCase(),
+                                                ][x],
                                                 style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 12.0),
