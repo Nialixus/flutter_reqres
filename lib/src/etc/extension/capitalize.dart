@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+/// Capitalized [String].
 String capitalize(String text) {
   try {
     return text
@@ -11,18 +10,7 @@ String capitalize(String text) {
   }
 }
 
+/// Capitalized [String] extension.
 extension Capitalize on String {
   toCaps() => capitalize(this);
-}
-
-String colorString(Color color) {
-  try {
-    return "#${color.value.toRadixString(16).substring(2)}".toUpperCase();
-  } catch (e) {
-    return color.toString();
-  }
-}
-
-extension ColorString on Color {
-  String asString() => colorString(this);
 }

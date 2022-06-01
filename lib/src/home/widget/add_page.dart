@@ -1,6 +1,8 @@
 part of 'home_page.dart';
 
+/// PopUp Add User.
 class AddPage extends StatelessWidget {
+  /// Add User Page.
   const AddPage({Key? key}) : super(key: key);
 
   @override
@@ -17,6 +19,9 @@ class AddPage extends StatelessWidget {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
+        //
+        // Form Field
+        //
         Material(
           color: Colors.transparent,
           child: Container(
@@ -90,6 +95,10 @@ class AddPage extends StatelessWidget {
                 ),
               )),
         ),
+
+        //
+        // ReqRes Logo
+        //
         Transform.translate(
             offset: const Offset(0, -35),
             child: Container(

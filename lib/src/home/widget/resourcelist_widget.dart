@@ -1,6 +1,8 @@
 part of 'home_page.dart';
 
+/// Widget to display fetched [ResourceListModel].
 class ResourceListWidget extends StatelessWidget {
+  /// Displaying models of [ResourceListModel].
   const ResourceListWidget({Key? key}) : super(key: key);
 
   @override
@@ -12,6 +14,9 @@ class ResourceListWidget extends StatelessWidget {
       child: BlocBuilder<ResourceListCubit, ResourceListState>(
           builder: (context, state) {
         if (state is ResourceListSucceed) {
+          //
+          // Displaying [ResourceListModel].
+          //
           return SingleChildScrollView(
               key: key,
               scrollDirection: Axis.horizontal,
@@ -89,6 +94,9 @@ class ResourceListWidget extends StatelessWidget {
                 ],
               ));
         } else if (state is ResourceListFailed) {
+          //
+          // Displaying error message.
+          //
           return Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -113,6 +121,9 @@ class ResourceListWidget extends StatelessWidget {
             ],
           );
         } else {
+          //
+          // Display loading widget.
+          //
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.only(left: width * 0.05),

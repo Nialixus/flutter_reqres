@@ -1,9 +1,15 @@
 part of 'home_page.dart';
 
+/// Widget to display title of model list.
 class TitleWidget extends StatelessWidget {
+  /// Displaying Title of list.
   const TitleWidget({Key? key, required this.title, this.add})
       : super(key: key);
+
+  /// Title of list.
   final String title;
+
+  /// Choose wheter add button should be displayed or not.
   final bool? add;
 
   @override
@@ -16,6 +22,7 @@ class TitleWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
+          // Title of list.
           Expanded(
               child: Text(
             title,
@@ -24,6 +31,8 @@ class TitleWidget extends StatelessWidget {
                 fontSize: 20.0,
                 color: Colors.white),
           )),
+
+          // Add button.
           add == true
               ? Padding(
                   padding: EdgeInsets.symmetric(

@@ -1,6 +1,8 @@
 part of "home_page.dart";
 
+/// Widget to display list of [UserModel].
 class UserListWidget extends StatelessWidget {
+  /// Displaying list of [UserModel].
   const UserListWidget({Key? key}) : super(key: key);
 
   @override

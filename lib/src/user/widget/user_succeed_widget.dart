@@ -2,7 +2,7 @@ part of 'user_page.dart';
 
 /// Widget where [UserCubit.fetching] end succesfully.
 class UserSucceedWidget extends StatelessWidget {
-  /// Display fetched [SingleUserModel] from [UserCubit.fetching].
+  /// Display [SingleUserModel] data from [UserCubit.fetching].
   const UserSucceedWidget({Key? key, required this.model}) : super(key: key);
 
   /// User Model from API
@@ -72,6 +72,7 @@ class UserSucceedWidget extends StatelessWidget {
   }
 }
 
+/// Menu Button
 Widget _menuButton(BuildContext context,
         {required Color secondaryColor, required SingleUserModel model}) =>
     PopupMenuButton(

@@ -6,11 +6,15 @@ import 'package:http/http.dart';
 
 part '../state/log_api_state.dart';
 
+/// State used in [LogPage].
 class LogAPICubit extends Cubit<LogAPIState> {
+  /// Initiate [LogAPIState].
   LogAPICubit() : super(LogAPIInitiated());
 
+  /// Default base of API.
   String base = "https://reqres.in/api";
 
+  /// Method when register button onClick.
   void register({required String email, required String password}) {
     emit(LogAPILoading());
 
@@ -33,6 +37,7 @@ class LogAPICubit extends Cubit<LogAPIState> {
     });
   }
 
+  /// Method when login button onClick.
   void login({required String email, required String password}) {
     emit(LogAPILoading());
 

@@ -24,7 +24,7 @@ class EditPage extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         //
-        // ResRes Update
+        // ReqRes Update
         //
         Material(
           color: Colors.transparent,

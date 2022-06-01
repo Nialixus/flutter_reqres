@@ -1,18 +1,51 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_reqres_test/src/etc/extension/capitalize.dart';
-
 import '../../etc/model/support_model.dart';
+import '../../resource/model/resource_model.dart';
 
-part '../../resource/model/resource_model.dart';
-
+/// Resource List Model class for fetched model from API.
 class ResourceListModel {
+  ///```dart
+  ///{
+  ///   page: 1, ...
+  ///}
+  ///```
   final int page;
+
+  ///```dart
+  ///{
+  ///   per_page: 6, ...
+  ///}
+  ///```
   final int perPage;
+
+  ///```dart
+  ///{
+  ///   total: 12, ...
+  ///}
+  ///```
   final int total;
+
+  ///```dart
+  ///{
+  ///   total_pages: 2, ...
+  ///}
+  ///```
   final int totalPages;
+
+  ///```dart
+  ///{
+  ///   data: [ ... ], ...
+  ///}
+  ///```
   final List<ResourceModel> data;
+
+  ///```dart
+  ///{
+  ///   support: ... , ...
+  ///}
+  ///```
   final SupportModel support;
 
+  /// List of [ResourceModel] used in [ResourceListWidget].
   ResourceListModel(
       {required this.page,
       required this.perPage,
@@ -21,6 +54,7 @@ class ResourceListModel {
       required this.data,
       required this.support});
 
+  /// Convert json model to [ResourceListModel].
   factory ResourceListModel.fromJson(Map<String, dynamic> json) {
     return ResourceListModel(
         page: json["page"] as int,

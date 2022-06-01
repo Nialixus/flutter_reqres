@@ -1,13 +1,18 @@
 part of 'home_page.dart';
 
+/// Displaying index page.
 class Pagination extends StatelessWidget {
+  /// Displaying index of user page.
   const Pagination.user({Key? key})
       : _id = 0,
         super(key: key);
+
+  /// Displaying index of resource page.
   const Pagination.resource({Key? key})
       : _id = 1,
         super(key: key);
 
+  /// Private identification of [Pagination].
   final int _id;
 
   @override
