@@ -1,16 +1,8 @@
-# product_api
+# Flutter ReqRes
+Flutter sample with REQRES.in API using cubit.
 
-A new Flutter project.
+## Preview
+https://user-images.githubusercontent.com/45191605/171330284-876c1abf-fb76-4fa8-88c4-cdd2c84970de.mp4
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## API Documentation
+[ReqRes.in](https://reqres.in)
