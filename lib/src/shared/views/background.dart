@@ -7,10 +7,12 @@ class GradientBackground extends StatelessWidget {
     this.padding,
     this.height,
     this.minHeight,
+    this.shape = BoxShape.rectangle,
     this.child,
   });
   final Widget? child;
   final double? height, minHeight;
+  final BoxShape shape;
   final EdgeInsetsGeometry? margin, padding;
 
   @override
@@ -23,6 +25,7 @@ class GradientBackground extends StatelessWidget {
         minHeight: minHeight ?? 0.0,
       ),
       decoration: BoxDecoration(
+        shape: shape,
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
