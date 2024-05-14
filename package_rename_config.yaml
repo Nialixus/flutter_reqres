@@ -1,0 +1,31 @@
+package_rename_config:
+  android:
+    app_name: Flutter Reqres by Louis Wiwawan
+    package_name: app.inidia.reqres
+    override_old_package: com.example.example
+    lang: kotlin
+
+  ios:
+    app_name: Flutter Reqres by Louis Wiwawan
+    bundle_name: flutter_reqres
+    package_name: app.inidia.reqres
+
+  web:
+    app_name: Flutter Reqres by Louis Wiwawan
+    description: A Flutter Reqres Demo by Louis Wiwawan
+
+  linux:
+    app_name: Flutter Reqres by Louis Wiwawan
+    package_name: app.inidia.reqres
+    exe_name: app-inidia-reqres-linux-x64
+
+  windows:
+    app_name: Flutter Reqres by Louis Wiwawan
+    organization: OutdatedGuy
+    copyright_notice: Copyright ©️ 2022 OutdatedGuy. All rights reserved.
+    exe_name: app-inidia-reqres-win32
+
+  macos:
+    app_name: Flutter Reqres by Louis Wiwawan
+    package_name: app.inidia.reqres
+    copyright_notice: Copyright ©️ 2024 Louis Wiwawan. All rights reserved.

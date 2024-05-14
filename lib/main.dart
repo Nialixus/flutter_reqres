@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_reqres_test/src/shared/shared.dart';
+import 'package:go_router/go_router.dart';
+import 'package:local_shared/local_shared.dart' hide Shared;
 
-import 'src/log/widget/log_page.dart';
-import 'src/log/cubit/log_api_cubit.dart';
-import 'src/log/cubit/log_switch_cubit.dart';
-
-void main() {
-  runApp(MaterialApp(
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalShared('database').initialize();
+  runApp(
+    MaterialApp.router(
+      title: 'Flutter Reqres Test',
       debugShowCheckedModeBanner: false,
-      title: "REQRES API Sample",
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => LogAPICubit()),
-          BlocProvider(create: (_) => LogSwitchCubit())
-        ],
-        child: const LogPage(),
-      )));
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: const ColorScheme.light(
+          surface: Colors.white,
+          onSurface: Colors.black,
+          primary: Color(0xff31428B),
+          secondary: Color(0xff583A75),
+        ),
+      ),
+      routerConfig: GoRouter(
+        initialLocation: Shared.route.home.path,
+        routes: [Shared.route.login, Shared.route.home],
+      ),
+    ),
+  );
 }
