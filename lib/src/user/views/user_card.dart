@@ -16,107 +16,133 @@ class UserCard extends StatelessWidget {
       child: Center(
         child: Container(
           clipBehavior: Clip.antiAlias,
-          height: 200.0,
+          height: context.width * 0.75,
           width: context.width,
-          constraints: const BoxConstraints(maxWidth: 300.0),
+          constraints: const BoxConstraints(
+            maxWidth: 600.0,
+            maxHeight: 600.0,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Shared.value.spacing * 0.25),
             boxShadow: [
               BoxShadow(
-                offset: Offset(
-                  Shared.value.spacing * 0.5,
-                  Shared.value.spacing * 0.5,
-                ),
-                blurRadius: Shared.value.spacing * 0.1,
-                color: context.color.onSurface.withOpacity(0.2),
+                blurRadius: Shared.value.spacing * 0.5,
+                color: context.color.secondary.withOpacity(0.5),
               ),
             ],
           ),
           alignment: Alignment.center,
           margin: EdgeInsets.only(bottom: Shared.value.spacing),
           child: InkMaterial(
-            onTap: () => context.go(
-              '/${Shared.route.user.path.replaceAll(':id', '${data.id}')}',
-            ),
-            color: context.color.surface,
-            child: Stack(
-              alignment: Alignment.center,
-              fit: StackFit.expand,
-              children: [
-                Positioned.fill(
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: context.color.surface,
-                      strokeWidth: Shared.value.spacing * 0.25,
-                    ),
+              onTap: () => context.go(
+                    '/${Shared.route.user.path.replaceAll(':id', '${data.id}')}',
                   ),
-                ),
-                Column(
+              color: context.color.surface,
+              child: Padding(
+                padding: EdgeInsets.all(Shared.value.spacing),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Expanded(
-                      child: DImage(
-                        source: data.avatar,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) {
-                          return Container(
-                            alignment: Alignment.center,
-                            color: context.color.primary,
-                            child: Icon(
-                              Icons.broken_image,
-                              color: context.color.surface,
+                    Row(
+                      children: [
+                        Container(
+                          clipBehavior: Clip.antiAlias,
+                          width: Shared.value.spacing * 2.0,
+                          height: Shared.value.spacing * 2.0,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: DImage(source: data.avatar),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: Shared.value.spacing * 0.75,
+                              right: Shared.value.spacing * 0.25,
                             ),
-                          );
-                        },
+                            child: Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(text: '${data.fullName} '),
+                                  WidgetSpan(
+                                    child: Container(
+                                      width: Shared.value.spacing,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: context.color.primary,
+                                      ),
+                                      padding: EdgeInsets.all(
+                                        Shared.value.spacing * 0.1,
+                                      ),
+                                      child: Icon(
+                                        Icons.check,
+                                        color: context.color.surface,
+                                        size: Shared.value.spacing * 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.more_horiz,
+                          color: context.color.onSurface,
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(
+                          vertical: Shared.value.spacing * 0.5,
+                        ),
+                        color: context.color.primary,
+                        child: DImage(
+                          source: data.avatar,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Shared.value.spacing,
-                        vertical: Shared.value.spacing * 0.5,
-                      ),
-                      child: ShaderMask(
-                        blendMode: BlendMode.srcIn,
-                        shaderCallback: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              context.color.primary,
-                              context.color.secondary,
-                            ]).createShader,
-                        child: Text(
-                          data.fullName,
-                          style: context.text.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
+                    Row(
+                      children: [
+                        for (int i = 0; i < 2; i++)
+                          Padding(
+                            padding: EdgeInsets.only(
+                              right: Shared.value.spacing * 0.75,
+                            ),
+                            child: Icon(
+                              [
+                                Icons.thumb_up_outlined,
+                                Icons.thumb_down_outlined,
+                              ][i],
+                              color: context.color.onSurface,
+                            ),
                           ),
+                        const Spacer(),
+                        Icon(
+                          Icons.bookmark_border_outlined,
+                          color: context.color.onSurface,
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: Shared.value.spacing * 0.5),
+                      child: Text(
+                        Shared.value.lipsum,
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.text.bodyMedium?.copyWith(
+                          color: context.color.onSurface.withOpacity(0.75),
+                          fontSize: 12.0,
                         ),
                       ),
                     )
                   ],
                 ),
-                Positioned(
-                  bottom: Shared.value.spacing * 0.5,
-                  right: Shared.value.spacing * 0.5,
-                  child: InkMaterial(
-                    color: Colors.transparent,
-                    shapeBorder: const CircleBorder(),
-                    onTap: () => launchUrl(
-                      Uri(scheme: 'mailto', path: data.email),
-                    ),
-                    child: GradientBackground(
-                      shape: BoxShape.circle,
-                      padding: EdgeInsets.all(Shared.value.spacing * 0.75),
-                      child: Icon(
-                        Icons.mail,
-                        size: Shared.value.spacing,
-                        color: context.color.surface,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              )),
         ),
       ),
     );
