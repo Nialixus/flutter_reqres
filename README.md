@@ -1,23 +1,11 @@
 # Flutter ReqRes
-Flutter sample with REQRES.in API using cubit.
+Flutter sample project with MVC architecture, ReqRes.in API integration, and Cubit for state management.
 
-## Preview
+## Preview v1
 https://user-images.githubusercontent.com/45191605/171330284-876c1abf-fb76-4fa8-88c4-cdd2c84970de.mp4
 
-<table>
-  <tr>
-    <td><img src='https://user-images.githubusercontent.com/45191605/171331767-a00e1b25-fcfd-433a-9f28-56598c1f52eb.png'/>
-</td>
-    <td><img src='https://user-images.githubusercontent.com/45191605/171331782-9d71caae-c165-45df-b722-cf4a9691cba3.png'/>
-</td>
-  </tr>
-  <tr>
-    <td><img src='https://user-images.githubusercontent.com/45191605/171331802-d001ce61-38a1-4010-87d8-d8f338e266c8.png'/>
-</td>
-    <td><img src='https://user-images.githubusercontent.com/45191605/171331816-1f697810-7e1a-40df-9abb-9319bd516ca2.png'/>
-</td>
-  </tr>
-</table>
+## Preview v2
+https://github.com/Nialixus/flutter_reqres/assets/45191605/f74fc078-e8c7-447a-aa54-74d8733fb96e
 
 ## API Documentation
 [ReqRes.in](https://reqres.in)
