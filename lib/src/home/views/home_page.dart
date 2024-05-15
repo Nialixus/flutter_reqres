@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
               Tooltip(
                 message: "Log out",
                 child: IconButton(
-                  onPressed: () => Login.store
+                  onPressed: () => Login.session
                       .delete()
                       .then((_) => context.replace(Shared.route.login.path)),
                   icon: const Icon(
@@ -57,8 +57,10 @@ class HomePage extends StatelessWidget {
         ),
         body: BlocConsumer(
             bloc: controller,
-            listener: (_, __) {
-              print(__);
+            listener: (_, state) {
+              if (state is ReadErrorState<SharedResponse>) {
+                context.replace(Shared.route.login.path);
+              }
             },
             builder: (context, state) {
               if (state is ReadSuccessState<HomeData>) {
@@ -70,71 +72,32 @@ class HomePage extends StatelessWidget {
                     itemCount: state.data!.users.length,
                     itemBuilder: (_, index) => UserCard(
                       state.data!.users[index],
-                      onTap: () {},
                       ignore: true,
                     ),
                   ),
                 );
               } else if (state is ReadErrorState) {
-                return Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(Shared.value.spacing),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'OOPS',
-                        style: context.text.bodyLarge?.copyWith(
-                          color: context.color.surface,
-                          fontSize: Shared.value.spacing * 3.0,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      Flexible(
-                        child: Container(
-                          width: context.width,
-                          constraints: const BoxConstraints(maxWidth: 600.0),
-                          padding: EdgeInsets.symmetric(
-                            vertical: Shared.value.spacing,
-                          ),
-                          child: SingleChildScrollView(
-                            child: Text(
-                              state.message,
-                              textAlign: TextAlign.justify,
-                              style: context.text.bodyMedium?.copyWith(
-                                color: context.color.surface.withOpacity(0.5),
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      InkMaterial(
-                        color: context.color.surface,
-                        onTap: controller.run,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: Shared.value.spacing * 2.0,
-                            vertical: Shared.value.spacing * 0.5,
-                          ),
-                          child: Text(
-                            'Reload',
-                            style: context.text.bodyMedium,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                return ErrorPage(
+                  message: state.message,
+                  onReload: controller.run,
                 );
               }
+
               return Skeletonizer(
                 ignorePointers: false,
+                effect: LoadingBackground(
+                  duration: Shared.value.delay,
+                  color: Color.lerp(
+                    context.color.surface,
+                    context.color.primary,
+                    0.35,
+                  )!,
+                ),
                 child: ListView.builder(
                   padding: EdgeInsets.all(Shared.value.spacing),
                   itemBuilder: (_, __) => UserCard(
-                    UserCardData.test(),
+                    UserData.test(),
                     ignore: true,
-                    onTap: () {},
                   ),
                 ),
               );

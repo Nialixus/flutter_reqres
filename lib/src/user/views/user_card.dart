@@ -4,47 +4,47 @@ class UserCard extends StatelessWidget {
   const UserCard(
     this.data, {
     super.key,
-    required this.onTap,
     this.ignore = false,
   });
-  final UserCardData data;
+  final UserData data;
   final bool ignore;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Skeleton.ignorePointer(
       ignore: ignore,
-      child: InkMaterial(
-        onTap: onTap,
-        child: Center(
-          child: Container(
-            height: 200.0,
-            width: context.width,
-            constraints: const BoxConstraints(maxWidth: 300.0),
-            decoration: BoxDecoration(
-              color: context.color.surface,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(
-                    Shared.value.spacing * 0.75,
-                    Shared.value.spacing * 0.75,
-                  ),
-                  blurRadius: Shared.value.spacing * 0.5,
-                  color: context.color.onSurface.withOpacity(0.5),
+      child: Center(
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          height: 200.0,
+          width: context.width,
+          constraints: const BoxConstraints(maxWidth: 300.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Shared.value.spacing * 0.25),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(
+                  Shared.value.spacing * 0.5,
+                  Shared.value.spacing * 0.5,
                 ),
-              ],
+                blurRadius: Shared.value.spacing * 0.1,
+                color: context.color.onSurface.withOpacity(0.2),
+              ),
+            ],
+          ),
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(bottom: Shared.value.spacing),
+          child: InkMaterial(
+            onTap: () => context.go(
+              '/${Shared.route.user.path.replaceAll(':id', '${data.id}')}',
             ),
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(bottom: Shared.value.spacing),
+            color: context.color.surface,
             child: Stack(
               alignment: Alignment.center,
               fit: StackFit.expand,
               children: [
                 Positioned.fill(
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: context.color.primary,
+                  child: Center(
                     child: CircularProgressIndicator(
                       color: context.color.surface,
                       strokeWidth: Shared.value.spacing * 0.25,
@@ -61,17 +61,16 @@ class UserCard extends StatelessWidget {
                         errorBuilder: (_, __, ___) {
                           return Container(
                             alignment: Alignment.center,
-                            color: context.color.surface,
+                            color: context.color.primary,
                             child: Icon(
                               Icons.broken_image,
-                              color: context.color.primary,
+                              color: context.color.surface,
                             ),
                           );
                         },
                       ),
                     ),
-                    Container(
-                      color: context.color.surface,
+                    Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: Shared.value.spacing,
                         vertical: Shared.value.spacing * 0.5,
@@ -79,8 +78,8 @@ class UserCard extends StatelessWidget {
                       child: ShaderMask(
                         blendMode: BlendMode.srcIn,
                         shaderCallback: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                             colors: [
                               context.color.primary,
                               context.color.secondary,

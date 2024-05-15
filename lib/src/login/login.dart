@@ -15,5 +15,5 @@ part 'models/login_data.dart';
 part 'views/login_page.dart';
 
 final class Login {
-  static SharedDocument store = Shared.collection.document('token');
+  static SharedDocument session = Shared.collection.document('token');
 }

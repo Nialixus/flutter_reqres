@@ -28,7 +28,7 @@ extension BuildContextExtension on BuildContext {
       ..showSnackBar(SnackBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        margin: EdgeInsets.only(bottom: height - 120),
+        margin: EdgeInsets.only(bottom: height - 150.0),
         behavior: SnackBarBehavior.floating,
         content: AwesomeSnackbarContent(
           title: title,

@@ -1,9 +1,11 @@
-part of '../home.dart';
+part of '../user.dart';
 
-class HomeRequest extends Cubit<ReadStates> {
-  HomeRequest([super.initialState = const ReadLoadingState()]) {
+class UserRequest extends Cubit<ReadStates> {
+  UserRequest({required this.id}) : super(const ReadLoadingState()) {
     run();
   }
+
+  final int id;
 
   Future<void> run() async {
     emit(const ReadLoadingState());
@@ -22,7 +24,7 @@ class HomeRequest extends Cubit<ReadStates> {
         await Future.delayed(Shared.value.delay);
 
         Response response = await http.get(
-          '${Shared.value.baseURL}/users?page=2',
+          '${Shared.value.baseURL}/users/$id',
           // options: Options(
           //   headers: {
           //     'Authorization':'Bearer ${LoginData.fromJSON(session.one!).token}'
@@ -31,9 +33,9 @@ class HomeRequest extends Cubit<ReadStates> {
         );
 
         emit(
-          ReadSuccessState<HomeData>(
+          ReadSuccessState<UserData>(
             message: 'Data Successfully Loaded',
-            data: HomeData.fromJSON(response.data),
+            data: UserData.fromJSON(response.data),
           ),
         );
       }
@@ -41,6 +43,8 @@ class HomeRequest extends Cubit<ReadStates> {
       emit(ReadErrorState(message: e.message ?? '$e', data: e.response));
     } catch (e, s) {
       emit(ReadErrorState(message: '$e', data: s));
+    } finally {
+      http.close();
     }
   }
 }

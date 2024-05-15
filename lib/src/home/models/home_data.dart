@@ -2,10 +2,10 @@ part of '../home.dart';
 
 class HomeData extends DModel {
   const HomeData({required this.users});
-  final List<UserCardData> users;
+  final List<UserData> users;
 
   @override
-  HomeData copyWith({List<UserCardData>? users}) {
+  HomeData copyWith({List<UserData>? users}) {
     return HomeData(users: users ?? this.users);
   }
 
@@ -18,7 +18,7 @@ class HomeData extends DModel {
     return HomeData(
         users: value
             .of<List>('data')
-            .map<UserCardData>((e) => UserCardData.fromJSON(e))
+            .map<UserData>((e) => UserData.fromJSON(e))
             .toList());
   }
 }

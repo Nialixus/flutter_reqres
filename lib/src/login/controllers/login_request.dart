@@ -39,7 +39,7 @@ class LoginRequest extends Cubit<WriteStates> {
         );
 
         LoginData data = LoginData.fromJSON(response.data);
-        SharedResponse store = await Login.store.update(
+        SharedResponse store = await Login.session.update(
           data.toJSON,
           force: true,
         );
@@ -50,7 +50,7 @@ class LoginRequest extends Cubit<WriteStates> {
         ));
       }
     } on DioException catch (e) {
-      emit(WriteErrorState(message: e.message ?? '$e', data: e.stackTrace));
+      emit(WriteErrorState(message: e.message ?? '$e', data: e.response));
     } catch (e, s) {
       emit(WriteErrorState(message: '$e', data: s));
     } finally {
