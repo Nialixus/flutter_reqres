@@ -1,5 +1,5 @@
 name: flutter_reqres_test
-description: Flutter test with REQRES API.
+description: Flutter sample project with MVC architecture, ReqRes.in API integration, and Cubit for state management.
 
 publish_to: 'none'
 

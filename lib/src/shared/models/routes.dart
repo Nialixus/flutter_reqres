@@ -6,7 +6,9 @@ final class Routes {
     builder: (_, __) => BlocProvider(
       create: (_) => LoginRequest(),
       child: const SelectionArea(
-        child: LoginPage(),
+        child: SafeArea(
+          child: LoginPage(),
+        ),
       ),
     ),
   );
@@ -17,7 +19,9 @@ final class Routes {
     builder: (_, __) => BlocProvider(
       create: (_) => HomeRequest(),
       child: const SelectionArea(
-        child: HomePage(),
+        child: SafeArea(
+          child: HomePage(),
+        ),
       ),
     ),
   );
@@ -27,7 +31,9 @@ final class Routes {
     builder: (_, state) => BlocProvider(
       create: (_) => UserRequest(id: state.pathParameters.of('id')),
       child: const SelectionArea(
-        child: UserPage(),
+        child: SafeArea(
+          child: UserPage(),
+        ),
       ),
     ),
   );
