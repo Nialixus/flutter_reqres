@@ -9,6 +9,9 @@ class UserRequest extends Cubit<ReadStates> {
 
   Future<void> run() async {
     emit(const ReadLoadingState());
+    // Mock delay to make loading state more noticable
+    await Future.delayed(Shared.value.delay);
+
     Dio http = Dio();
 
     try {
@@ -20,9 +23,6 @@ class UserRequest extends Cubit<ReadStates> {
           data: session,
         ));
       } else {
-        // Mock delay to make loading state more noticable
-        await Future.delayed(Shared.value.delay);
-
         Response response = await http.get(
           '${Shared.value.baseURL}/users/$id',
           // options: Options(

@@ -8,6 +8,9 @@ class LoginRequest extends Cubit<WriteStates> {
 
   Future<void> run() async {
     emit(const WriteLoadingState());
+    // Mock Delay
+    await Future.delayed(Shared.value.delay);
+
     Dio http = Dio();
 
     try {
@@ -27,9 +30,6 @@ class LoginRequest extends Cubit<WriteStates> {
           data: password.focusNode,
         ));
       } else {
-        // Mock Delay
-        await Future.delayed(Shared.value.delay);
-
         Response response = await http.post(
           '${Shared.value.baseURL}/login',
           data: {

@@ -18,9 +18,16 @@ class UserPage extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is ReadErrorState) {
-              return ErrorPage(
-                message: state.message,
-                onReload: controller.run,
+              return Column(
+                children: [
+                  AppBar(),
+                  Expanded(
+                    child: ErrorPage(
+                      message: state.message,
+                      onReload: controller.run,
+                    ),
+                  ),
+                ],
               );
             } else if (state is ReadSuccessState<UserData>) {
               return UserPage.body(context, data: state.data!);

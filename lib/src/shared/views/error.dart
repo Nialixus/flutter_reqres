@@ -20,7 +20,7 @@ class ErrorPage extends StatelessWidget {
           Text(
             'OOPS',
             style: context.text.bodyLarge?.copyWith(
-              color: context.color.surface,
+              color: context.color.primary,
               fontSize: Shared.value.spacing * 3.0,
               fontWeight: FontWeight.w900,
             ),
@@ -35,9 +35,9 @@ class ErrorPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   message,
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.center,
                   style: context.text.bodyMedium?.copyWith(
-                    color: context.color.surface.withOpacity(0.5),
+                    color: context.color.onSurface.withOpacity(0.75),
                     fontWeight: FontWeight.w300,
                   ),
                 ),
@@ -45,7 +45,7 @@ class ErrorPage extends StatelessWidget {
             ),
           ),
           InkMaterial(
-            color: context.color.surface,
+            color: context.color.primary,
             onTap: onReload,
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -54,7 +54,9 @@ class ErrorPage extends StatelessWidget {
               ),
               child: Text(
                 'Reload',
-                style: context.text.bodyMedium,
+                style: context.text.bodyMedium?.copyWith(
+                  color: context.color.surface,
+                ),
               ),
             ),
           ),
