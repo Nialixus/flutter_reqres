@@ -26,8 +26,8 @@ class UserHeader extends SliverPersistentHeaderDelegate {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    context.color.surface,
                     context.color.surface.withOpacity(percentage),
+                    context.color.surface,
                   ],
                 ),
               ),

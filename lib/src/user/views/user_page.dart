@@ -8,7 +8,7 @@ class UserPage extends StatelessWidget {
     UserRequest controller = context.read<UserRequest>();
 
     return Scaffold(
-      backgroundColor: context.color.primary,
+      backgroundColor: context.color.surface,
       body: BlocConsumer(
           bloc: controller,
           listener: (context, state) {
@@ -23,7 +23,7 @@ class UserPage extends StatelessWidget {
                 onReload: controller.run,
               );
             } else if (state is ReadSuccessState<UserData>) {
-              return UserPage.body(context, data: state.data as UserData);
+              return UserPage.body(context, data: state.data!);
             } else {
               return Skeletonizer(
                 ignorePointers: false,
@@ -35,10 +35,7 @@ class UserPage extends StatelessWidget {
                     0.35,
                   )!,
                 ),
-                child: UserPage.body(
-                  context,
-                  data: UserData.test(),
-                ),
+                child: UserPage.body(context, data: UserData.test()),
               );
             }
           }),

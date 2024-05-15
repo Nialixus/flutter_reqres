@@ -35,7 +35,7 @@ class UserRequest extends Cubit<ReadStates> {
         emit(
           ReadSuccessState<UserData>(
             message: 'Data Successfully Loaded',
-            data: UserData.fromJSON(response.data),
+            data: UserData.fromJSON(response.data['data']),
           ),
         );
       }
